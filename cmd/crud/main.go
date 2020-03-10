@@ -24,6 +24,11 @@ func main() {
 	if ok {
 		*port = portEnv
 	}
+	dsnEnv, ok := os.LookupEnv("DATABASE_URL")
+	if ok {
+		*dsn = dsnEnv
+	}
+
 	addr := net.JoinHostPort(*host, *port)
 	start(addr, *dsn)
 }
