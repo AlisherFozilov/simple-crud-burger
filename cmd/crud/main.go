@@ -6,6 +6,7 @@ import (
 	"github.com/AlisherFozilov/crud/cmd/crud/app"
 	"github.com/AlisherFozilov/crud/pkg/crud/services/burgers"
 	"github.com/jackc/pgx/v4/pgxpool"
+	"log"
 	"net"
 	"net/http"
 	"os"
@@ -22,13 +23,14 @@ func main() {
 	flag.Parse()
 	portEnv, ok := os.LookupEnv("PORT")
 	if ok {
+		log.Print()
 		*port = portEnv
 	}
 	dsnEnv, ok := os.LookupEnv("DATABASE_URL")
 	if ok {
 		*dsn = dsnEnv
 	}
-
+	log.Print(*dsn)
 	addr := net.JoinHostPort(*host, *port)
 	start(addr, *dsn)
 }
