@@ -43,6 +43,11 @@ func start(addr string, dsn string) {
 	}
 
 	burgersSvc := burgers.NewBurgersSvc(pool)
+	err = burgersSvc.InitDB()
+	if err != nil {
+		panic(err)
+	}
+
 	server := app.NewServer(
 		router,
 		pool,
